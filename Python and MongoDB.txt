@@ -1,0 +1,140 @@
+Python and MongoDB 
+ 
+Connecting python with MongoDB and inserting, retrieving, updating and deleting. 
+ 
+Installing pymongo: Python –m pip install pymongo 
+ 
+Listing Existing Databases:
+ import pymongo
+ myclient=pymongo.MongoClient("mongodb://localhost:27017/")
+ print(myclient.list_database_names())
+ Output: >>>  ['admin', 'config', 'local', 'mydb'] >>> 
+
+
+ 
+Creating database: 
+import pymongo
+ myclient=pymongo.MongoClient("mongodb://localhost:27017/")
+ print(myclient.list_database_names())
+ mydb=myclient["mydatabase"] #creates database 
+mycol=mydb["customers"] # creates collection
+ mydict={"name":"ABC","Address":"Mumbai"} 
+x=mycol.insert_one(mydict) #insert document in collection
+ for x in mycol.find():    
+ print(x)
+ Output: >>>  ['admin', 'config', 'local', 'mydatabase', 'mydb']
+ {'Address': 'Mumbai', '_id': ObjectId('5bb589a29b1b9523c806ac13'), 'name': 'ABC'} >>> 
+
+ 
+Insert Many:
+ import pymongo
+ myclient=pymongo.MongoClient("mongodb://localhost:27017/")
+ print(myclient.list_database_names()) 
+ 
+mydb=myclient["mydatabase"] #creates database
+ mycol=mydb["customers"] # creates collection 
+ 
+mylist=[{"name":"ABC","Address":"Mumbai"},{"name":"XYZ","Address":"Thane"}]
+ x=mycol.insert_many(mylist) #insert document in collection 
+ 
+for x in mycol.find():  
+   print(x) 
+
+ 
+Output: >>>  ['admin', 'config', 'local', 'mydatabase', 'mydb'] 
+[{'Address': 'Mumbai', 'name': 'ABC', '_id': ObjectId('5bb580c39b1b950bb8a5452f')},
+ {'Address': 'Thane', 'name': 'XYZ', '_id': ObjectId('5bb580c39b1b950bb8a54530')}] >>> 
+
+ 
+Retrieving one document: mycol.find_one() 
+
+ 
+Retrieving multiple documents:
+
+    for x in mycol.find(): 
+    print(x) 
+
+
+ 
+Deleteing one:
+
+ >>> myquery={"address":"Mumbai"} 
+>>> mycol.delete_one(myquery)
+ <pymongo.results.DeleteResult object at 0x044B4F58> 
+
+ 
+Delete Many:
+ import pymongo
+ myclient=pymongo.MongoClient("mongodb://localhost:27017/") 
+print(myclient.list_database_names()) 
+ 
+mydb=myclient["mydatabase"] #creates database
+ mycol=mydb["customers"] # creates collection 
+ 
+mylist=[{"name":"ABC","Address":"Mumbai"},{"name":"XYZ","Address":"Thane"}]
+ x=mycol.insert_many(mylist) #insert document in collection 
+ 
+for x in mycol.find():    
+ print(x) 
+ 
+myquery = {"Address" : "Mumbai"}
+ x=mycol.delete_many(myquery) 
+print(x.deleted_count,"Documents deleted") 
+ 
+
+Output: >>>  ['admin', 'config', 'local', 'mydatabase', 'mydb'] 
+{'_id': ObjectId('5bb589a29b1b9523c806ac13'), 'name': 'ABC', 'Address': 'Mumbai'}
+ {'_id': ObjectId('5bb58a0b9b1b95080c6e53a6'), 'name': 'ABC', 'Address': 'Mumbai'}
+ {'_id': ObjectId('5bb58a0b9b1b95080c6e53a7'), 'name': 'XYZ', 'Address': 'Thane'}
+ {'_id': ObjectId('5bb58c339b1b9510e87c4e47'), 'name': 'ABC', 'Address': 'Mumbai'}
+ {'_id': ObjectId('5bb58c339b1b9510e87c4e48'), 'name': 'XYZ', 'Address': 'Thane'} 
+3 Documents deleted 
+ 
+
+Delete All:
+
+ x=mycol.delete_many() 
+print(x.deleted_count,”Documents Deleted”) 
+ 
+Update One: import pymongo myclient=pymongo.MongoClient("mongodb://localhost:27017/") 
+myclient.drop_database("mydatabase") 
+mydb=myclient["mydatabase"] #creates database 
+mycol=mydb["customers"] # creates collection 
+ 
+mylist=[{"name":"ABC","Address":"Mumbai"},{"name":"XYZ","Address":"Thane"} ]
+ x=mycol.insert_many(mylist) #insert document in collection 
+ 
+myquery = {"Address" : "Mumbai"}
+ newval = {"$set" : {"Address" : "palghar"}}
+ mycol.update_one(myquery, newval) 
+ 
+for x in mycol.find():  
+   print(x) 
+
+ 
+Output: >>>  ['admin', 'config', 'local', 'mydatabase', 'mydb']
+ {'name': 'ABC', 'Address': 'palghar', '_id': ObjectId('5bb58f249b1b950ecce7d5ab')} 
+{'name': 'XYZ', 'Address': 'Thane', '_id': ObjectId('5bb58f249b1b950ecce7d5ac')}
+ >>> 
+
+ 
+Update Many:
+
+ import pymongo
+ myclient=pymongo.MongoClient("mongodb://localhost:27017/")
+ mydb=myclient["mydatabase"] #creates database 
+mycol=mydb["customers"] # creates collection 
+ 
+myquery ={"address" : {"$regex" : "^p"}}
+
+ newval = {"$set": {"address" : "Mumbai"}}
+ x = mycol.update_many(myquery, newval) print(x.modified_count,"Documents Updated") 
+ 
+
+for x in mycol.find():  
+   print(x) 
+
+ 
+Output: >>>  ['admin', 'config', 'local', 'mydatabase', 'mydb']
+ {'name': 'ABC', 'Address': 'Mumbai', '_id': ObjectId('5bb58f249b1b950ecce7d5ab')}
+ {'name': 'XYZ', 'Address': 'Thane', '_id': ObjectId('5bb58f249b1b950ecce7d5ac')}

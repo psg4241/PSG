@@ -1,0 +1,110 @@
+ Implementing Aggregation 
+ 
+A.Write a mongoDB query to use sum, avg, min and max. 
+ 
+Query: 
+ 
+>for(vari=1;i<=20;i++)db.tyit.insert({"Name":"TestUser"+i,"Age":20+i,"marks":40+i ,"gender":"F"}) 
+ 
+ 
+>for(vari=1;i<=20;i++)db.tyit.insert({"Name":"TestUser1"+i,"Age":25+i,"marks":45 +i,"gender":"M"}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",totalstudent:{$sum:1}}}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",avg_marks:{$avg:"$marks"}}}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",min_marks:{$min:"$marks"}}}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",max_marks:{$max:"$marks"}}}) 
+ 
+
+
+
+Practical No. 3 Implementing Aggregation 
+ 
+A.Write a mongoDB query to use sum, avg, min and max. 
+ 
+Query: 
+ 
+>for(vari=1;i<=20;i++)db.tyit.insert({"Name":"TestUser"+i,"Age":20+i,"marks":40+i ,"gender":"F"}) 
+ 
+ 
+>for(vari=1;i<=20;i++)db.tyit.insert({"Name":"TestUser1"+i,"Age":25+i,"marks":45 +i,"gender":"M"}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",totalstudent:{$sum:1}}}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",avg_marks:{$avg:"$marks"}}}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",min_marks:{$min:"$marks"}}}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",max_marks:{$max:"$marks"}}}) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ B.Write a mongoDB query to use first and last expression. 
+ 
+Query: 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",first_name:{$first:"$name"}}}) 
+ 
+ 
+> db.tyit.aggregate({$group:{_id:"$gender",last_name:{$last:"$Name"}}}) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ C.Write a mongoDB query to use push and addToSet expression. 
+ 
+Query: 
+ 
+> db.tyit.aggregate([{$group:{_id:"$user1",marks:{$push:"$marks"}}}]) 
+ 
+ 
+ 
+> db.tyit.aggregate([{$group:{_id:"$user1",marks:{$addToSet:"$marks"}}}])
