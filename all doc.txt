@@ -1,0 +1,851 @@
+Practical No: 01
+Aim: Displaying different Led Patterns with Raspberry Pi.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGA convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	3 LED
+10.	Breadboard
+11.	Wires
+
+Software Required:
+1.	Raspbian OS
+
+Procedure:
+1.	Hardware Setup
+•	Connect components as in the Diagram
+
+
+
+
+
+
+GPIO16 ? LED1 Anode
+GPIO20 ? LED2 Anode
+GPIO21 ? LED3 Anode
+*Black wire is the GND (ground)
+2.	Software Setup
+•	Geany Programmer’s Editor
+•	Rapberry ?Programming ? Geany Programmer’s Editor
+ 
+•	File ? New  
+•	File ? Save (provide file name anything)   *.py
+•	Type The Following Code
+ 
+from  gpiozero import LED
+from time import sleep
+led1=LED(21)
+led2=LED(16)
+led3=LED(20)
+led4=LED(26)
+print("Program is running .... CTRL+C to quit")
+
+def pattern1():
+	print("Pattern 1 running...")
+	led1.on()
+	sleep(0.5)
+	led1.off()
+	sleep(0.5)
+	
+	led2.on()
+	sleep(0.5)
+	led2.off()
+	sleep(0.5)
+	
+	led3.on()
+	sleep(0.5)
+	led3.off()
+	sleep(0.5)
+	
+	led4.on()
+	sleep(0.5)
+	led4.off()
+	sleep(0.5)
+	
+def pattern2():
+	print("Pattern 2 running ....")
+
+	led1.on()
+	led2.on()
+	led3.on()
+	led4.on()
+	sleep(1)
+	led1.off()
+	led2.off()
+	led3.off()
+	led4.off()
+	sleep(1)
+	
+
+def pattern3():
+	print("Pattern 3 running ....")
+	for i in range(4):
+		if i==1:
+			for i in range(3):
+			    led1.on()
+			    sleep(0.1)
+			    led1.off()
+			    sleep(0.1)
+		elif i==2:
+			 for i in range(3):
+			     led2.on()
+			     sleep(0.1)
+			     led2.off()
+			     sleep(0.1)
+		elif i==3:
+			 for i in range(3):
+			     led3.on()
+			     sleep(0.1)
+			     led3.off()
+			     sleep(0.1)
+		else:
+			for i in range(3):
+			    led4.on()
+			    sleep(0.1)
+			    led4.off()
+			    sleep(0.1)							
+	
+
+def pattern4():
+	print("Pattern 4 running ....")
+	led1.on()
+	sleep(1)
+	led1.off()
+	sleep(1)
+	led2.on()
+	sleep(1)
+	led2.off()
+	sleep(1)
+	led3.on()
+	sleep(1)
+	led3.off()
+	sleep(1)
+	led4.on()
+	sleep(1)
+	led4.off()
+	sleep(1)
+	
+while True:
+	pattern1()
+	for i in range(2):
+		pattern2()
+	pattern3()
+	pattern4()
+
+led1.off()
+led2.off()
+led3.off()
+led4.off() 
+ 
+
+
+
+
+
+Conclusion:
+1.	In this practical we have learned how to connect GPIO pins to LEDs.
+2.	We have learned about “gpiozero” and “time” module of Python.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Practical No: 03
+Aim: Raspberry Pi Based Oscilloscope.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGI convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Female – Female jumper wires. (5 numbers)
+10.	ADS1115
+ Software Required:
+1.	Raspbian OS
+2.	Node-Red
+Procedure: 
+1.	Hardware Setup:
+•	Connect the pins as given bellow….
+?	Pi 3V to ADS1015 VDD - Remember the maximum input voltage to any ADC channel cannot exceed this VDD 3V value!
+?	Pi GND to ADS1015 GND
+?	Pi SCL to ADS1015 SCL
+?	Pi SDA to ADS1015 SDA
+
+
+ 
+
+
+2.	Software Setup:
+•	Type the Following in the Terminal
+?	sudo apt install npm
+?	node-red-start
+•	Navigate to Start ?Preferences ?Raspberry Pi Configuration ?Interfaces 
+Enable I2C and click on OK.
+•	Open the browser and navigate to http://localhost:1880.
+•	Option ? Manage Palette ? Install (search for “node-red-contrib-ads1x15”)
+Install it.
+•	Drag and drop the following elements ….
+   
+•	Connect as shown in the below figure… 
+•	Double click on charts and create a new group by clicking on the pencil icon on the right.
+•	Change the “Default” to Home or any name you want.
+•	Click on the pencil icon on the right  and click add
+•	Double click on “timestamp” element and change none to interval of 1 second
+•	Double Click on “chart” and change interpolate to “bezier” and x-axis to 1 minute.
+•	Navigate to http://localhost:1880/ui to see the oscilloscope reading touch the A0 pin with your hand to change the potential difference as a result of which changing the reading on the screen.
+Precautions:
+•	If it is a fresh flash of Raspbian OS “sudo apt update” and “sudo apt upgrade” is a must thing.
+•	Connect the components before powering on the device and double check your connections.
+ 
+
+
+
+
+
+
+Practical No: 04
+Aim: Controlling Raspberry Pi with Telegram.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGA convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Relay board
+10.	Female – male jumper wires. 
+11.	Bread Board
+
+Software Required:
+1.	Raspbian OS
+2.	Geany Programmer’s  Editor
+3.	Telegram App
+
+Procedure: 
+1.	Hardware Setup:
+•	Connect according to the figure.
+                    GPIO20 ? LED2 Anode
+                    GPIO21 ? LED3 Anode
+                    *Black wire is the GND (ground)
+
+ 
+
+2.	Software Setup:
+•	Install Telegram in android phone.
+•	Search for contact “BotFather”
+•	Send him “/start” command
+•	Send him “/newbot”
+•	Give a name to you bot
+•	Give a username to the bot (It must be a unique one)
+•	On success you will be provided with a HTTP API token. (jot it down)
+•	In Raspberry Pi Terminal type the following…
+?	sudo apt update 
+?	sudo apt upgrade
+?	sudo pip install telepot
+
+•	open Geany Programmer’s  Editor and create a python script as given below
+
+import sys
+import time
+import random
+import datetime
+import telepot
+from gpiozero import LED
+
+                           led1=LED(21)
+led2=LED(20)
+def onled1():
+    
+    led1.on()
+    return
+def offled1():
+    
+    led1.off()
+    return
+def onled2():
+    led2.on()
+    return
+def offled2():
+    led2.off()
+    return    
+
+def handle(msg):
+    chat_id = msg['chat']['id']
+    command = msg['text']
+
+    print 'Got command: %s' % command
+
+    if command == 'on led1':
+       bot.sendMessage(chat_id, onled1())
+    elif command =='off led1':
+       bot.sendMessage(chat_id, offled1())
+    elif command =='on led2':
+       bot.sendMessage(chat_id, onled2())
+    elif command =='off led2':
+       bot.sendMessage(chat_id, offled2())     
+
+bot = telepot.Bot('YourToken’)  (enter the jotted token)
+bot.message_loop(handle)
+print 'I am listening...'
+
+while 1:
+     time.sleep(10)
+     led1.off()
+     led2.off()  
+		 
+•	Run the program by clicking on the rocket Icon.
+
+Precautions:
+•	If it is a fresh flash of Rasbian OS “sudo apt update” and “sudo apt upgrade” is a must thing.
+•	Connect the components before powering on the device and double check your connections.
+•	Take the help of the professor in connection as this project includes use of high voltage.
+Conclusion:
+•	We are able to control two LED lights through Telegram app.
+•	By sending “on led1” switches on the led1 and “off led1” switches off led1, and vise-versa
+
+
+
+
+
+
+Practical No: 05
+Aim: Setting up wireless access point using raspberry Pi.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGI convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+
+Software Required:
+1.	Rapbeian OS
+2.	RaspAP 
+Procedure: 
+1.	Hardware Setup:
+•	Connect the Ethernet port of raspberry pi to an Ethernet port in a router/switch using the Ethernet cable
+
+2.	Software Setup:
+•	Run the following commands in the terminal ….
+?	sudo apt update
+?	sudo apt upgrade
+
+•	Install RaspAP  by typing the following commands in the terminal…..
+?	wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap
+
+•	Pass Y in every prompt  in the terminal
+•	Reboot the Device
+•	Open the browser in Raspberry Pi and type the following URL  http://localhost
+ 
+•	Enter Username: “admin” and Password: “secret”
+•	Navigate to “Configure Hotspot”
+ 
+•	Set the setting as ….
+   Interface: wlan0
+   SSID: anythingYouWant 
+   Wireless Mode: g
+   Channel: anything will do
+•	Press “Save settings”
+•	Navigate to System and Press “Reboot”
+•	Grab your phone and search for your network as you have given in the SSID.
+•	Connect
+
+Precautions:
+•	If it is a fresh flash of Rasbian OS “sudo apt update” and “sudo apt upgrade” is a must thing.
+•	SSID name should not be same that of your neighbor.
+
+
+
+
+
+
+
+Practical No: 07
+Aim: Raspberry Pi Module GPS Interfacing.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGI convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Relay board
+10.	Female – Female jumper wires. (4 numbers)
+11.	GY-GPS6MV2
+ Software Required:
+1.	Rapbeian OS
+2.	Thonny Python IDE
+Procedure: 
+1.	Hardware Setup:
+•	Connect the pins as given bellow….
+?	GPIO15 connects to Pin Rx.
+?	GPIO16 connects to Pin Tx.
+?	Pin6 connects to Pin GND.
+?	Pin2 connects to Pin VCC.
+
+ 
+
+2.	Software Setup:
+•	Navigate to Start ? Preferences ? Raspberry Pi Configuration ? Interfaces 
+Enable Serial and click on OK .
+•	Type the following code in the terminal…
+?	sudo pip install pynmea2
+•	Before typing the code we must ensure GPS is communicating with raspberry pi or not. Type the following code to check it works or not.
+?	sudo cat /dev/ttyS0
+ 
+
+•	Open any editor you like and type the following python code
+from time import sleep
+from  serial import Serial
+import string
+import pynmea2
+import webbrowser
+
+
+port = "/dev/ttyS0"
+ser = Serial(port, baudrate = 9600)
+longitude_list=[]
+latitude_list=[]
+run=True
+def longitude_average(longitudes):
+    return sum(longitudes)/len(longitudes)
+
+def latitude_average(latitudes):
+    return sum(latitudes)/len(latitudes)
+
+while run:
+         try:
+           data=ser.readline()
+           if(data[0:6]=='$GPGGA'):
+                    msg=pynmea2.parse(data)
+                    lon=float(msg.lon)/100
+                    longitude_list.append(lon)
+                    lat=float(msg.lat)/100
+                    latitude_list.append(lat)
+
+                    strings="Lat: "+str(lat)+"  Lon: "+str(lon)
+                    print(strings)
+                  
+         except:
+            averagedLog=longitude_average(longitude_list)
+            averagedLat=latitude_average(latitude_list)
+            print("Averaged Logitude: "+str(averagedLog)+" ""Averaged Latitude: "+str(averagedLat))
+            webbrowser.open("https://www.latlong.net/c/?lat="+str(averagedLat)+"&long="+str(averagedLog))
+            run=False
+             
+     
+•	Open a terminal and navigate to the folder where you have save the python file
+and run the following command
+?	sudo python <filename>.py
+
+Precautions:
+•	If it is a fresh flash of Raspbian OS “sudo apt update” and “sudo apt upgrade” is a must thing.
+•	Connect the components before powering on the device and double check your connections.
+•	When you are reading and writing to tag make sure you are in close proximity with the RFID.
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Practical No: 08
+Aim: IoT based web based home automation using raspberry pi.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGA convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Relay board
+10.	Female – Female jumper wires. 
+
+Software Required:
+1.	Raspbian OS
+2.	Node-RED
+3.	NPM 
+Procedure: 
+1.	Hardware Setup:
+•	Connect according to the figure.
+                    GPIO20 ? IN1
+                    GPIO21 ? IN2
+                    PIN2 ? VCC (5v)
+                    PIN6 ? GND
+             
+                    *Black wire is the GND (ground)
+
+ 
+ 
+1.	Software Setup:
+•	Open Terminal and type in the following commands
+?	sudo apt install npm
+?	update-nodejs-and-nodered
+?	npm install node-red-dashboard
+?	node-red-start
+
+
+•	Open browser and type the URL http://localhost:1880/
+ 
+•	Drag and drop 2 “switch” components from the left panel under dashboard category.   
+•	Drag and drop 2 “rpi gpio” components from the left panel under Raspberry Pi 
+category.
+          
+•	Connect as shown in the figure.
+
+
+
+
+
+
+
+
+
+•	Double click on any one component and create new Group by clicking the pencil icon.
+•	Click on the pencil icon next to Tab to add new Tab
+•	Click on “Add”
+•	Click on “Update”
+•	Click on “Done”
+•	Add the second switch to the same group which we have just created. ([Home] Default)
+•	Double Click on rpi gpio component and select GPIO20.
+•	Do the same with the other rpi gpio component but this time select GPIO21.
+•	Once you do the above steps correctly you will see no read triangle on the top.
+•	Click on “Deploy” on top. 
+ 
+•	Open  http://localhost:1880/ui in new tab.
+ 
+
+Precautions:
+•	If it is a fresh flash of “Raspbian OS sudo” apt update and “sudo apt upgrade”  is a must thing.
+•	Connect the components before powering on the device and double check your connections.
+•	Take the help of the professor in connection as this project includes use of high voltage.
+
+Conclusion:
+•	We are able to control two AC powered light bulbs using the web interface.
+
+
+
+
+
+
+Practical No: 9
+Aim: Visitor Monitoring with Raspberry Pi and Pi Camera.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGI convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Pi Camera
+Software Required:
+1.	VlC media player
+
+
+Procedure: 
+1.	Hardware Setup:
+•	Connect the Pi Camera to the camera port in the Raspberry pi.  
+ 
+
+2.	Software Setup:
+•	Start? Preferences ? Raspberry Pi Configuration ? Interfaces ?Enable Camera.
+•	Install VLC in Raspberry pi by typing the following code in the terminal.
+?	sudo apt install vlc
+?	ifconfig (jot down the IP address of the raspberry Pi)
+?	raspivid -o - -t 0 -n -w 600 -h 400 -fps 12 | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264
+
+•	Install VLC In Desktop PC (https://www.videolan.org/vlc/download-windows.html)
+•	Open VLC Media Player Media ?Open Network Stream ? type the following address in to the URL ( rtsp://<Your_IP_ADDRESS>:8554/ )  use the jotted IP address.
+
+
+
+
+
+
+
+Practical No: 10
+Aim: Interfacing Raspberry pi with RFID.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	2.Ethernet Cable
+3.	Monitor
+4.	HDMI to VGA convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Relay board
+10.	Female – Female jumper wires. (7 numbers)
+11.	Female – Male jumper wires(3 numbers)
+12.	RFID-RC522
+13.	Buzzer
+14.	LED (red and green)
+15.	Bread board
+Software Required:
+1.	Raspbian OS
+2.	Thonny Python IDE
+Procedure: 
+1.	Hardware Setup:
+•	Connect as given below…
+?	SDA connects to Pin 24.
+?	SCK connects to Pin 23.
+?	MOSI connects to Pin 19.
+?	MISO connects to Pin 21.
+?	GND connects to Pin 6.
+?	RST connects to Pin 22.
+?	3.3v connects to Pin 1.
+?	GPIO20 connects to anode LED red
+?	GPIO21 connects to anode LED green
+?	GPIO16 connects to anode Buzzer
+ 
+
+2.	Software Setup:
+•	Navigate to Start ? Preferences ? Raspberry Pi Configuration ? Interfaces 
+Enable SPI and click on OK 
+•	Reboot
+•	Open Terminal and type the following commands …
+?	sudo apt update
+?	sudo apt upgrade
+?	sudo pip3 install  mfrc522
+•	open Programming? Thonny Python IDE ? New 
+•	Type the following code in a new file to get the ID of the tag…
+
+import RPi.GPIO as GPIO
+from mfrc522 import SimpleMFRC522
+
+reader = SimpleMFRC522()
+
+try:
+        id, text = reader.read()
+        print(id)
+        print(text)
+finally:
+        GPIO.cleanup()
+
+•	Run the file by pressing play button in the top
+•	Place the tag near the RFID.
+•	Jot down the ID from the terminal 
+•	Type the following code in a new file to write to tag…
+
+from mfrc522 import SimpleMFRC522
+import RPi.GPIO as GPIO
+reader = SimpleMFRC522()
+                         try:
+        text = input('New data:')
+        print("Now place your tag to write")
+        reader.write(text)
+        print("Written")
+finally:
+    GPIO.cleanup()
+
+•	Run file by pressing the run button on the top
+•	Enter a name for your tag press enter (jot down what you have written)
+•	Place the tag near the RFID reader wait for message written
+•	Create a new python file and type the following code…
+
+import sys
+from mfrc522 import SimpleMFRC522
+from time import sleep
+from gpiozero import Buzzer
+import RPi.GPIO as GPIO
+reader = SimpleMFRC522()
+                       autorizedGreenLed=Buzzer(21)
+unautorizedRedLed=Buzzer(20)
+buzzer=Buzzer(16)   
+def authenticationCheck(id,person):
+    if (id ==joted ID and person=='joted Name'):
+        print("Wellcome",person)
+        buzzer.beep(0.1,0.1,4)
+        
+        autorizedGreenLed.beep(0.5,0.5,10)  
+
+    else:
+        print("Un-Authoried personal")
+        buzzer.beep(0.5,0.5,4)
+        unautorizedRedLed.beep(0.3,0.3,10)  
+            
+    
+try:
+    while True:
+        print("Hold your tag near the reader")
+        id, person = reader.read()
+        authenticationCheck(id,person.strip())
+        sleep(5)
+except KeyboardInterrupt:
+    autorizedGreenLed.off()
+    buzzer.off()
+    unautorizedRedLed.off()
+    GPIO.cleanup()
+    Raise
+ 
+Precautions:
+•	If it is a fresh flash of Raspbian OS “sudo apt update” and “sudo apt upgrade” is a must thing.
+•	Connect the components before powering on the device and double check your connections.
+•	When you are reading and writing to tag make sure you are in close proximity with the RFID.
+Conclusion:
+•	We are able to authenticate a person on the basis of the physical tag a person is carrying. 
+ 
+
+
+
+
+
+
+Practical No: 11
+Aim: Building Google assistant using Raspberry Pi.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGA convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Jumper wires
+10.	Breadboard
+ Software Required:
+1.	Raspbian OS
+2.	Thonny Python 
+3.	Thingspeak (web portal)
+4.	IFTTT (web portal)
+Procedure: 
+1.	Hardware Setup:
+•	Connect according to the figure.
+                    GPIO20 ? LED2 Anode
+                    GPIO21 ? LED3 Anode
+*Black wire is the GND (ground)  
+2.	Software Setup:
+•	Thingspeak:
+?	Go to “Thingspeak” sign up and sign in https://thingspeak.com/users/sign_up
+?	Create a new channel and navigate to it.
+ 
+?	Navigate to API keys Tab and jot down the write API key and channel ID.
+?	Navigate to Channel Settings and tick mark field1 and field2 and provide “field1” and “field2” as their names. Save it.
+•	IFTTT: 
+1.	Browse to IFTTT (https://ifttt.com/) site and create and account by clicking on continue with Google.
+ 
+2.	Navigate to My Applets and create a new one by clicking New Applet
+                                         
+3.	Click on this and search for Google Assistant select “Say a simple phrase”.
+4.	Complete the form for light on
+5.	Click on “that”
+ 
+6.	Search for “Webhooks” 
+7.	Click on “Make a web request”
+8.	In the URL field type the following https://api.thingspeak.com/update?api_key={YOUR_API_Key}&field1=on
+9.	Method : POST
+10.	Content type: text/plain
+11.	Click on create action
+12.	Repeat steps 2 to 11 for light off just change the command you give to Google assistant in step 4 and in step 8 change “&field1=on” to “&field1=off”.
+13.	Repeat the same steps for another device in this case a fan. Just change the commands in step 4 which you give to Google assistant and step 8 change “&field12=on” and “&field2=off” accordingly.
+14.	At the end it should look like this…
+ 
+
+
+
+
+•	Open a terminal and type pip3 install thingspeak
+•	Open Thonny Python IDE and type the following code…
+from time import sleep
+import ast
+import thingspeak
+from gpiozero import LED
+import json
+channel_id = 792696
+write_key = "Your_API_KEY" 
+
+lightsPin = LED(21)
+fanPins = LED(20)
+
+
+def doit(channel):
+    try:
+        lights = ast.literal_eval(channel.get_field_last(field="field1"))
+        l = lights["field1"]
+        print("Lights=>>", l)
+        fans = ast.literal_eval(channel.get_field_last(field="field2"))
+        f = fans['field2']
+        print("Fans =>>", f)
+        if l == "on":
+            lightsPin.on()
+        else:
+            lightsPin.off()
+        if f == "on":
+            fanPins.on()
+        else:
+            fanPins.off()
+
+    except:
+        print("Failed to get")
+
+
+if __name__ == "__main__":
+    channel = thingspeak.Channel(channel_id, write_key)
+    while True:
+            doit(channel)
+            sleep(1)
+        
+•	Run the python script in a terminal by typing python3 <filename>.py
+•	And open Google assistant in the phone with the same account you have used to signed in to the IFTTT web portal, and give command “switch on lights”.
+
+Precautions:
+•	If it is a fresh flash of Raspbian OS “sudo apt update” and “sudo apt upgrade” is a must thing.
+•	Connect the components before powering on the device and double check your connections.
+•	Use the same Google account in android phone and the IFTTT web site.
+•	Use your API KEY correctly
+•	Use the same phrase as you have given in the IFTTT form.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
