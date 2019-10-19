@@ -1,0 +1,30 @@
+Visitor Monitoring with Raspberry Pi and Pi Camera.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGI convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+9.	Pi Camera
+Software Required:
+1.	VlC media player
+
+
+Procedure: 
+1.	Hardware Setup:
+•	Connect the Pi Camera to the camera port in the Raspberry pi.  
+ 
+
+2.	Software Setup:
+•	Start Preferences  Raspberry Pi Configuration  Interfaces Enable Camera.
+•	Install VLC in Raspberry pi by typing the following code in the terminal.
+	sudo apt install vlc
+	ifconfig (jot down the IP address of the raspberry Pi)
+	raspivid -o - -t 0 -n -w 600 -h 400 -fps 12 | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264
+image         raspistill -o image1.jpg
+video         raspivid -o video.h264 -t 50000
+•	Install VLC In Desktop PC (https://www.videolan.org/vlc/download-windows.html)
+•	Open VLC Media Player Media Open Network Stream  type the following address in to the URL ( rtsp://<Your_IP_ADDRESS>:8554/ )  use the jotted IP address.

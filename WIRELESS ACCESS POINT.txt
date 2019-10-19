@@ -1,0 +1,46 @@
+Setting up wireless access point using raspberry Pi.
+Hardware Required: 
+1.	Raspberry Pi 3B+
+2.	Ethernet Cable
+3.	Monitor
+4.	HDMI to VGI convertor
+5.	Micro SD card (any class best is class 10)
+6.	Adaptor with 5v 2A
+7.	USB mouse
+8.	USB keyboard
+
+Software Required:
+1.	Rapbeian OS
+2.	RaspAP 
+Procedure: 
+1.	Hardware Setup:
+•	Connect the Ethernet port of raspberry pi to an Ethernet port in a router/switch using the Ethernet cable
+
+2.	Software Setup:
+•	Run the following commands in the terminal ….
+	sudo apt update
+	sudo apt upgrade
+
+•	Install RaspAP  by typing the following commands in the terminal…..
+	wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap
+
+•	Pass Y in every prompt  in the terminal
+•	Reboot the Device
+•	Open the browser in Raspberry Pi and type the following URL  http://localhost
+ 
+•	Enter Username: “admin” and Password: “secret”
+•	Navigate to “Configure Hotspot”
+ 
+•	Set the setting as ….
+   Interface: wlan0
+   SSID: anythingYouWant 
+   Wireless Mode: g
+   Channel: anything will do
+•	Press “Save settings”
+•	Navigate to System and Press “Reboot”
+•	Grab your phone and search for your network as you have given in the SSID.
+•	Connect
+
+Precautions:
+•	If it is a fresh flash of Rasbian OS “sudo apt update” and “sudo apt upgrade” is a must thing.
+•	SSID name should not be same that of your neighbor.
